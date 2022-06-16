@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Validation</title>
+    <script src="https://kit.fontawesome.com/92b0c2839c.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            ;
+        }
+
+        body {
+            background-color: rebeccapurple;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .contain {
+            background-color: #fff;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .3);
+            width: 400px;
+            max-width: 100%;
+            overflow: hidden;
+        }
+
+        .head {
+            background-color: rgb(196, 191, 191);
+            border-bottom: 1px solid #f0f0f0;
+            padding: 8px 40px;
+        }
+
+        .head h2 {
+            margin: 0;
+            text-align: center;
+
+        }
+
+        .my-form {
+            padding: 30px 40px;
+
+        }
+
+        .form-ctrl {
+            margin-bottom: 10px;
+            padding-bottom: 20px;
+            position: relative;
+        }
+
+        .form-ctrl label {
+            display: inline-block;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .form-ctrl .check-box {
+            position: absolute;
+            left: -150px;
+            top: 8px;
+            margin: 10px 0;
+        }
+
+        .form-ctrl span {
+            margin: 10px 0;
+            ;
+            font-size: 14px;
+            position: absolute;
+            left: 35px;
+            top: 3px;
+        }
+
+        .form-ctrl input {
+            border: 2px solid #f0f0f0;
+            outline: none;
+            border-bottom: 1px solid rgb(250, 129, 15);
+            border-left: 0;
+            border-top: 0;
+            border-right: 0;
+            display: block;
+            font-size: 14px;
+            padding: 10px;
+            width: 100%;
+        }
+
+        .form-ctrl.crt input {
+            border-color: #2ecc71;
+        }
+
+        .form-ctrl.err input {
+            border-color: #e74c3c;
+        }
+
+        .form-ctrl .fa-circle-check,
+        .form-ctrl .fa-circle-exclamation {
+            position: absolute;
+            top: 40px;
+            right: 10px;
+            visibility: hidden;
+        }
+
+        .form-ctrl.crt .fa-circle-check {
+            color: #2ecc71;
+            visibility: visible;
+        }
+
+        .form-ctrl.err .fa-circle-exclamation {
+            color: #e74c3c;
+            visibility: visible;
+        }
+
+        .form-ctrl small {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            visibility: hidden;
+        }
+
+        .form-ctrl.err small {
+            color: #e74c3c;
+            visibility: visible;
+        }
+
+        .my-form button {
+            background-color: #8e44ad;
+            border: 2px solid #8e44ad;
+            border-radius: 4px;
+            color: #fff;
+            font-size: 16px;
+            display: block;
+            padding: 10px;
+            width: 100%;
+            margin-top: 30px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="contain">
+        <div class="head">
+            <h2>Create Account</h2>
+        </div>
+        <form class="my-form" id="form">
+            <div class="form-ctrl">
+                <input type="text" placeholder="Enter Username" id="username">
+                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <small>Error Message</small>
+            </div>
+            <div class="form-ctrl">
+                <input type="tel" placeholder="Enter phone number" id="phone">
+                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <small>Error Message</small>
+            </div>
+            <div class="form-ctrl">
+                <input type="email" placeholder="Enter Email" id="email">
+                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <small>Error Message</small>
+            </div>
+            <div class="form-ctrl">
+                <input type="password" placeholder="Enter Password" id="password1">
+                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <small>Error Message</small>
+            </div>
+            <div class="form-ctrl">
+                <input type="password" placeholder="Re-type Password" id="password2">
+                <i class="fa-solid fa-circle-check"></i>
+                <i class="fa-solid fa-circle-exclamation"></i>
+                <small>Error Message</small>
+                <div class="form-ctrl">
+                    <input type="checkbox" checked class="check-box"><span>Accept to terms and conditions.</span>
+                    <i class="fa-solid fa-circle-check"></i>
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <small>Error Message</small>
+                </div>
+                <button>Submit</button>
+        </form>
+    </div>
+
+    <script>
+
+        let form = document.getElementById('form');
+        let username = document.getElementById('username');
+        let email = document.getElementById('email');
+        let password1 = document.getElementById('password1');
+        let password2 = document.getElementById('password2');
+
+        /*Function for Error*/
+
+        let setErrorFor = (input, message) => {
+
+            const formCtrl = input.parentElement;
+            const small = formCtrl.querySelector('small');
+
+            small.innerText = message;
+
+            formCtrl.className = 'form-ctrl err';
+        }
+        /*Function for Success*/
+
+        let setSuccessFor = (input) => {
+
+            const formCtrl = input.parentElement;
+            formCtrl.className = 'form-ctrl crt';
+
+
+        }
+
+        /*Function for Email Regex*/
+
+        function isEmail(email) {
+            return /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i.test(email);
+        }
+
+
+
+        function checkInput() {
+            const usernameValue = username.value.trim();
+            const emailValue = email.value.trim();
+            const password1Value = password1.value.trim();
+            const password2Value = password2.value.trim();
+
+            if (usernameValue === '') {
+
+                setErrorFor(username, 'username cannot be blank');
+            } else {
+
+                setSuccessFor(username);
+            }
+
+
+            if (emailValue === '') {
+
+                setErrorFor(email, 'Email cannot be blank');
+            } else if (!isEmail(emailValue)) {
+
+                setErrorFor(email, 'Email is not valid');
+            } else {
+
+                setSuccessFor(email);
+            }
+
+            if (password1Value === '') {
+                setErrorFor(password1, 'Email cannot be blank');
+            } else {
+                setSuccessFor(password1);
+            }
+
+            if (password1Value === '') {
+                setErrorFor(password1, 'password cannot be blank');
+            } else if (password1Value !== password2Value) {
+                setErrorFor(password1, 'password does not match');
+            }
+
+            else {
+                setSuccessFor(password2);
+            }
+
+
+        }
+
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            checkInput();
+        });
+
+    </script>
+
+</body>
+
+</html>
